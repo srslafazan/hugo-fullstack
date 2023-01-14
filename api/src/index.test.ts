@@ -1,7 +1,7 @@
 import "dotenv/config";
 import supertest from "supertest";
 import app from "./app";
-console.log("process.env.PORT", process.env.PORT);
+
 import application1 from "./fixtures/application1.json";
 
 const createApplication1 = () =>
