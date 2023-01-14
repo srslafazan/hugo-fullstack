@@ -1,0 +1,15 @@
+@import "../../styles/vars.scss";
+
+.spotlightGradient1 {
+  background: radial-gradient(
+    circle 300px,
+    scale-color($color-primary, $lightness: 50%),
+    rgba(255, 255, 255, 0.5)
+  );
+}
+
+.spotlightGradient2 {
+  background: radial-gradient(circle 250px,
+      scale-color($color-secondary, $lightness: 80%),
+      rgba(255, 255, 255, 0.2));
+}

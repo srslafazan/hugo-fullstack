@@ -42,7 +42,7 @@ router.post(
     applications[id] = { ...req.body, id };
     return res.json({
       application: applications[id],
-      resume: `http://${host}:${port}/applications/${id}/resume`,
+      resume: `http://${host}:${port}/applications/${id}/edit`,
     });
   }
 );
@@ -73,10 +73,10 @@ router.post("/:id/validate", guards.application.exists, (req, res) => {
 });
 
 // GET route to resume an existing application
-router.get("/:id/resume", guards.application.exists, (req, res) => {
-  return res.json({
-    application: applications[req.params.id],
-  });
-});
+// router.get("/:id/resume", guards.application.exists, (req, res) => {
+//   return res.json({
+//     application: applications[req.params.id],
+//   });
+// });
 
 export default router;

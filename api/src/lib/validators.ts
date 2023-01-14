@@ -48,7 +48,7 @@ export const schema = Joi.object({
 
 export const validators = {
   application: {
-    create: schema,
+    create: Joi.any(),
     update: schema,
     validate: schema,
   },

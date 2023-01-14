@@ -1,0 +1,23 @@
+.menu-mobile {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.menu-close {
+  font-size: 30px;
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}

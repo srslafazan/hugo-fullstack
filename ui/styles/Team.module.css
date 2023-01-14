@@ -1,0 +1,27 @@
+.container {
+  padding: 0 2rem;
+  position: relative;
+}
+
+.main {
+  padding: 4rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 600px) {
+  .main {
+    height: calc(100vh - 80px - 80px);
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .main {
+    height: auto;
+  }
+}

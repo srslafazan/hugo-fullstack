@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "./vars.css";
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 2.2rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.8rem;
+}
+h4 {
+  font-size: 1.6rem;
+}
+h5 {
+  font-size: 1.4rem;
+}
+h6 {
+  font-size: 1.2rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.text-theme-blue {
+  color: var(--color-primary);
+}
+
+.text-gradient {
+  background: -webkit-linear-gradient(
+    60deg,
+    var(--color-primary),
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-reverse {
+  background: -webkit-linear-gradient(
+    60deg,
+    var(--color-secondary),
+    var(--color-primary),
+    var(--color-primary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-both {
+  background: -webkit-linear-gradient(
+    60deg,
+    var(--color-primary),
+    var(--color-secondary),
+    var(--color-primary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.spotlight {
+  position: absolute;
+  width: 1000px;
+  height: 1000px;
+  background: radial-gradient(
+    circle 500px,
+    rgba(67, 157, 220, 0.6),
+    rgba(255, 255, 255, 0.6)
+  );
+  border-radius: 50%;
+  z-index: -1;
+}
