@@ -1,0 +1,20 @@
+{
+  "firstName": "Adam",
+  "lastName": "Hugo",
+
+  "dateOfBirth": "Mon Jan 01 1990 00:00:00 GMT-0800 (Pacific Standard Time)",
+
+  "address": "Addr1",
+  "street": "Street",
+  "city": "City",
+  "state": "State",
+  "zipcode": 12345,
+  "vehicles": [
+    {
+      "vin": "asdf123451234asdf",
+      "year": 2019,
+      "make": "Tesla",
+      "model": "Model 3"
+    }
+  ]
+}
