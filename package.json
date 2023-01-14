@@ -1,0 +1,29 @@
+{
+  "name": "hugo-fullstack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && node build/index.js",
+    "start:dev": "npx nodemon",
+    "build": "rimraf ./build && tsc",
+    "test:watch": "jest --watchAll",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.2.5",
+    "@types/node": "^18.11.18",
+    "jest": "^29.3.1",
+    "nodemon": "^2.0.20",
+    "rimraf": "^4.0.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  }
+}
