@@ -1,4 +1,4 @@
-# Stactica Template Static SPA
+# Hugo Fullstack UI
 
 ![Build Status](https://github.com/Stactica/st-template-static-spa/actions/workflows/nextjs.yml/badge.svg?branch=main)
 
@@ -32,12 +32,3 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-### Requirements
-
-[x] Display the current application state
-[] Allow information to be added or edited
-[] Do basic validation
-[] when everything is filled out, allow the application to be submitted, and display either:
-a. an error message if the application is not complete, or
-b. the quoted price to purchase insurance

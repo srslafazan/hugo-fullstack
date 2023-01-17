@@ -11,8 +11,12 @@ import {
 const vehicleTemplate: Vehicle = { vin: "", year: 0, make: "", model: "" };
 
 export const Application = ({ view = false, edit = false, id = "" }) => {
-  const [application, setApplication] = useState({ id } as any);
-  const [localApplication, setLocalApplication] = useState({ id } as any);
+  const [application, setApplication] = useState({
+    id: parseInt(id),
+  } as Partial<ApplicationType>);
+  const [localApplication, setLocalApplication] = useState({
+    id: parseInt(id),
+  } as Partial<ApplicationType>);
   const [validation, setValidation]: [any, Function] = useState(null);
   const [price, setPrice]: [any, Function] = useState(null);
 
@@ -52,7 +56,7 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
     setPrice(response.data.price);
   };
 
-  if (!id) return <div>loading...</div>;
+  if (!id) return null;
 
   return view ? (
     <div>
@@ -181,14 +185,13 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
           <button
             className="bg-green-100 p-2 rounded-sm my-4"
             onClick={(e) => {
-              // e.stopPropagation();
               e.preventDefault();
               setLocalApplication({
                 ...localApplication,
                 vehicles: [
                   ...(localApplication.vehicles || []),
                   { ...vehicleTemplate },
-                ],
+                ].slice(0, 3),
               });
             }}
           >
@@ -198,93 +201,112 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
             ? null
             : localApplication.vehicles.map(
                 ({ vin, year, make, model }: any, i: number) => (
-                  <div key={i}>
+                  <div key={i} className="flex items-center">
                     <br />
-                    <div className="flex justify-between pt-2">
-                      <label>VIN: </label>
-                      <input
-                        type="text"
-                        value={
-                          get(localApplication, ["vehicles", i, "vin"]) || vin
-                        }
-                        onChange={(e) => {
-                          const vehicles = [
-                            ...(localApplication.vehicles || [
-                              { ...vehicleTemplate },
-                            ]),
-                          ];
-                          vehicles[i].vin = e.target.value;
-                          setLocalApplication({
-                            ...localApplication,
-                            vehicles,
-                          });
-                        }}
-                      />
+                    <div>
+                      <div className="flex justify-between pt-2">
+                        <label>VIN: </label>
+                        <input
+                          type="text"
+                          value={
+                            get(localApplication, ["vehicles", i, "vin"]) || vin
+                          }
+                          onChange={(e) => {
+                            const vehicles = [
+                              ...(localApplication.vehicles || [
+                                { ...vehicleTemplate },
+                              ]),
+                            ];
+                            vehicles[i].vin = e.target.value;
+                            setLocalApplication({
+                              ...localApplication,
+                              vehicles,
+                            });
+                          }}
+                        />
+                      </div>
+                      <div className="flex justify-between pt-2">
+                        <label>Year: </label>
+                        <input
+                          type="text"
+                          value={
+                            get(localApplication, ["vehicles", i, "year"]) ||
+                            year
+                          }
+                          onChange={(e) => {
+                            const vehicles = [
+                              ...(localApplication.vehicles || [
+                                { ...vehicleTemplate },
+                              ]),
+                            ];
+                            vehicles[i].year = parseInt(e.target.value || "0");
+                            setLocalApplication({
+                              ...localApplication,
+                              vehicles,
+                            });
+                          }}
+                        />
+                      </div>
+                      <div className="flex justify-between pt-2">
+                        <label>Make: </label>
+                        <input
+                          type="text"
+                          value={
+                            get(localApplication, ["vehicles", i, "make"]) ||
+                            make
+                          }
+                          onChange={(e) => {
+                            const vehicles = [
+                              ...(localApplication.vehicles || [
+                                { ...vehicleTemplate },
+                              ]),
+                            ];
+                            vehicles[i].make = e.target.value;
+                            setLocalApplication({
+                              ...localApplication,
+                              vehicles,
+                            });
+                          }}
+                        />
+                      </div>
+                      <div className="flex justify-between pt-2">
+                        <label>Model: </label>
+                        <input
+                          type="text"
+                          value={
+                            get(localApplication, ["vehicles", i, "model"]) ||
+                            model
+                          }
+                          onChange={(e) => {
+                            const vehicles = [
+                              ...(localApplication.vehicles || [
+                                { ...vehicleTemplate },
+                              ]),
+                            ];
+                            vehicles[i].model = e.target.value;
+                            setLocalApplication({
+                              ...localApplication,
+                              vehicles,
+                            });
+                          }}
+                        />
+                      </div>
                     </div>
-                    <div className="flex justify-between pt-2">
-                      <label>Year: </label>
-                      <input
-                        type="text"
-                        value={
-                          get(localApplication, ["vehicles", i, "year"]) || year
-                        }
-                        onChange={(e) => {
-                          const vehicles = [
-                            ...(localApplication.vehicles || [
-                              { ...vehicleTemplate },
-                            ]),
-                          ];
-                          vehicles[i].year = e.target.value;
-                          setLocalApplication({
-                            ...localApplication,
-                            vehicles,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="flex justify-between pt-2">
-                      <label>Make: </label>
-                      <input
-                        type="text"
-                        value={
-                          get(localApplication, ["vehicles", i, "make"]) || make
-                        }
-                        onChange={(e) => {
-                          const vehicles = [
-                            ...(localApplication.vehicles || [
-                              { ...vehicleTemplate },
-                            ]),
-                          ];
-                          vehicles[i].make = e.target.value;
-                          setLocalApplication({
-                            ...localApplication,
-                            vehicles,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="flex justify-between pt-2">
-                      <label>Model: </label>
-                      <input
-                        type="text"
-                        value={
-                          get(localApplication, ["vehicles", i, "model"]) ||
-                          model
-                        }
-                        onChange={(e) => {
-                          const vehicles = [
-                            ...(localApplication.vehicles || [
-                              { ...vehicleTemplate },
-                            ]),
-                          ];
-                          vehicles[i].model = e.target.value;
-                          setLocalApplication({
-                            ...localApplication,
-                            vehicles,
-                          });
-                        }}
-                      />
-                    </div>
+                    <button
+                      className="bg-red-100 hover:bg-red-200 rounded-sm cursor-pointer p-4 ml-4"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setLocalApplication({
+                          ...localApplication,
+                          vehicles: [
+                            ...(localApplication.vehicles || []).slice(0, i),
+                            ...(localApplication.vehicles || []).slice(i + 1),
+                          ],
+                        });
+                      }}
+                    >
+                      x
+                    </button>
                   </div>
                 )
               )}

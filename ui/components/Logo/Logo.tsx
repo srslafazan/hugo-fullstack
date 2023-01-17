@@ -8,7 +8,7 @@ export const Logo = () => {
     <Link href="/" style={{ display: "flex", alignItems: "center" }}>
       <Image
         alt="logo"
-        src="https://v2.stactica.com/img/StacticaLogo.png"
+        src="/logo-hugo.svg"
         height={30}
         width={238}
         style={{

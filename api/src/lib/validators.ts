@@ -64,6 +64,7 @@ export const validators = {
       zipcode: Joi.number().required(),
       // Vehicle(s) (must have 1 vehicle, cannot have more than 3 total)
       vehicles: Joi.array()
+        .required()
         .min(1)
         .max(3)
         .items(

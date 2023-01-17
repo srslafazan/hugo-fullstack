@@ -23,7 +23,7 @@ export const Team = () => {
               height={150}
               width={150}
               alt="Shain"
-              src="https://shainlafazan.com/shain.png"
+              src="shain-lafazan.png"
               style={{
                 borderRadius: "50%",
                 height: "150px",
@@ -84,76 +84,6 @@ export const Team = () => {
             rel="noopener noreferrer"
             title="Shain Lafazan's LinkedIn"
             className="text-gradient"
-          >
-            <SiLinkedin
-              style={{
-                height: "30px",
-                width: "30px",
-                fill: "#0072b1",
-                background: "white",
-                borderRadius: "3px",
-              }}
-            />
-          </a>
-        </div>
-        <div className="flex flex-col items-center mb-14">
-          <div className="relative" style={{ transform: "translateX(5px)" }}>
-            <div
-              style={{
-                position: "absolute",
-                borderRadius: "50%",
-                height: "150px",
-                width: "150px",
-                background:
-                  "linear-gradient(var(--color-primary), var(--color-secondary))",
-                zIndex: -1,
-                transform: "translateX(-10px)",
-              }}
-            />
-            <Image
-              height={150}
-              width={150}
-              alt="Ryan"
-              src="https://media.licdn.com/dms/image/C5603AQFmncaB_JiB4Q/profile-displayphoto-shrink_400_400/0/1531697268092?e=1678320000&v=beta&t=cY2gGlO3taULJg7gaF9wDVoPZb8Ig3X_iHyPMRMVYE8"
-              style={{
-                borderRadius: "50%",
-                height: "150px",
-                width: "150px",
-              }}
-            />
-          </div>
-          <h3 className="text-2xl mt-2 mb-4 text-gradient-both font-bold">
-            Ryan Lafazan
-          </h3>
-          <p className="text-center px-4 mb-6">
-            <a
-              href="https://www.linkedin.com/in/rjlafazan/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Ryan"
-              className="text-gradient"
-            >
-              Ryan
-            </a>{" "}
-            is the co-founder of{" "}
-            <a
-              href="https://stactica.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Stactica Software"
-              className="text-gradient-reverse"
-            >
-              Stactica Software
-            </a>
-            , a software consulting company specializing in complete enterprise
-            software and IT solutions. Ryan has a passion for technology,
-            engineering, muy thai, security, and online privacy.
-          </p>
-          <a
-            href="https://www.linkedin.com/in/rjlafazan/"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Ryan Butler's LinkedIn"
           >
             <SiLinkedin
               style={{

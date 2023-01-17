@@ -2,6 +2,7 @@
   "name": "hugo-fullstack-ui",
   "version": "0.1.0",
   "author": "Shain Lafazan",
+  "description": "Hugo Fullstack UI",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -34,20 +35,18 @@
   },
   "license": "MIT",
   "company": {
-    "name": "Stactica",
+    "name": "Hugo Insurance",
     "country": "The United States of America",
-    "website": "https://www.stactica.com"
+    "website": "https://withhugo.com"
   },
   "contact": {
-    "email": "info@stactica.com"
+    "email": "shain.codes@gmail.com"
   },
   "domains": [
-    "stactica.com",
-    "www.stactica.com",
-    "blog.stactica.com",
-    "training.stactica.com"
+    "withugo.com",
+    "www.withugo.com"
   ],
   "termsOfService": {
-    "effectiveDate": "1-4-2023"
+    "effectiveDate": "1-17-2023"
   }
 }

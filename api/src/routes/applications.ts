@@ -63,10 +63,19 @@ router.put(
 
 // POST route to validate the application and return a price
 router.post("/:id/validate", guards.application.exists, (req, res) => {
-  if (!validators.application.validate.validate(applications[req.params.id])) {
-    return res.json({ valid: false });
+  const validationResult = validators.application.validate.validate(
+    applications[req.params.id]
+  );
+  console.log(validationResult);
+  console.log("");
+  console.log("");
+  console.log(JSON.stringify(validationResult, null, 2));
+  if (validationResult.error) {
+    return res.status(400).json({ valid: false });
   }
-  return res.json({ valid: true, price: (Math.random() * 100).toFixed(2) });
+  return res
+    .status(200)
+    .json({ valid: true, price: (Math.random() * 100).toFixed(2) });
 });
 
 export default router;

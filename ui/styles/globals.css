@@ -88,8 +88,8 @@ input {
   height: 1000px;
   background: radial-gradient(
     circle 500px,
-    rgba(67, 157, 220, 0.6),
-    rgba(255, 255, 255, 0.6)
+    rgba(108, 105, 212, 0.6),
+    rgba(220, 99, 160, 0.6)
   );
   border-radius: 50%;
   z-index: -1;

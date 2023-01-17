@@ -17,6 +17,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <button
+          className="bg-green-100 hover:bg-green-200 p-4 rounded-sm"
           onClick={async () => {
             const response = await await fetch("/api/applications", {
               method: "post",
