@@ -1,9 +1,5 @@
 # Hugo Fullstack UI
 
-![Build Status](https://github.com/Stactica/st-template-static-spa/actions/workflows/nextjs.yml/badge.svg?branch=main)
-
-Check out the [demo application](https://stactica.github.io/st-template-static-spa).
-
 ## Requirements
 
 - Node v18
@@ -23,7 +19,7 @@ First, run the development server:
 pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+By default, the application will run at [http://localhost:3000](http://localhost:3000).
 
 ### Routes
 
