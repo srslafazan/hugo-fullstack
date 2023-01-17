@@ -13,5 +13,6 @@
     "noImplicitAny": false,
     "skipLibCheck": true,
   },
-  "exclude": ["node_modules", "babel.config.js"]
+  "exclude": ["node_modules", "babel.config.js"],
+  "include": ["../api/src/lib/types.ts", "../api/src/lib/validators.ts"]
 }

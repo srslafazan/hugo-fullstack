@@ -16,7 +16,7 @@ export const validators = {
           const diff = yearsDiff(value, new Date());
           return diff < 16
             ? helper.message({ custom: "Age must be at least 16" })
-            : true;
+            : value;
         }),
       address: Joi.string(),
       street: Joi.string(),
@@ -54,7 +54,7 @@ export const validators = {
           if (diff < 16) {
             return helper.message({ custom: "Age must be at least 16" });
           } else {
-            return true;
+            return value;
           }
         }),
       address: Joi.string().required(),

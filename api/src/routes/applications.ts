@@ -66,7 +66,7 @@ router.post("/:id/validate", guards.application.exists, (req, res) => {
   if (!validators.application.validate.validate(applications[req.params.id])) {
     return res.json({ valid: false });
   }
-  return res.json({ valid: true, price: Math.random() * 100 });
+  return res.json({ valid: true, price: (Math.random() * 100).toFixed(2) });
 });
 
 export default router;

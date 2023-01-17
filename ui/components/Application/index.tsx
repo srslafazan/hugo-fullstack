@@ -2,14 +2,19 @@ import { useCallback, useEffect, useState } from "react";
 import { get } from "lodash";
 import axios from "axios";
 
-import { validators } from "../../../api/build/lib/validators";
+import { validators } from "../../../api/src/lib/validators";
+import {
+  Application as ApplicationType,
+  Vehicle,
+} from "../../../api/src/lib/types";
 
-const vehicleTemplate = { vin: "", year: "", make: "", model: "" };
+const vehicleTemplate: Vehicle = { vin: "", year: 0, make: "", model: "" };
 
 export const Application = ({ view = false, edit = false, id = "" }) => {
   const [application, setApplication] = useState({ id } as any);
   const [localApplication, setLocalApplication] = useState({ id } as any);
   const [validation, setValidation]: [any, Function] = useState(null);
+  const [price, setPrice]: [any, Function] = useState(null);
 
   useEffect(() => {
     if (!id) return;
@@ -22,14 +27,12 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
 
   const validateUpdate = useCallback(() => {
     const valid = validators.application.update.validate(localApplication);
-    console.log("valid", valid);
     setValidation(valid);
     return valid;
   }, [localApplication]);
 
   const validateSubmit = useCallback(() => {
     const valid = validators.application.validate.validate(localApplication);
-    console.log("valid", valid);
     setValidation(valid);
     return valid;
   }, [localApplication]);
@@ -44,23 +47,33 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
       ...localApplication,
     });
 
+  const getQuote = async () => {
+    const response = await axios.post(`/api/applications/${id}/validate`);
+    setPrice(response.data.price);
+  };
+
   if (!id) return <div>loading...</div>;
 
   return view ? (
     <div>
-      <h1 className="text-center mb-12">View application</h1>
+      <h1 className="text-center mb-4">View application</h1>
       <pre>{JSON.stringify(application, null, 2)}</pre>
     </div>
   ) : edit ? (
     <div>
-      <h1 className="text-center mb-12">Edit application</h1>
-      <p style={{ color: "red" }}>{validation?.error?.message}</p>
-      <div className="flex">
-        <pre>{JSON.stringify(localApplication, null, 2)}</pre>
+      <h1 className="text-center mb-4">Edit application</h1>
+      <p className="text-center text-green-900">
+        {price && <span>Quote: ${price}</span>}
+      </p>
+      <p className="text-center text-red-900">{validation?.error?.message}</p>
+      <div className="flex justify-between pt-2">
+        <pre className="p-10 text-sm">
+          {JSON.stringify(localApplication, null, 2)}
+        </pre>
         {/* Naive form */}
         {/* TODO: render form dynamically based on structure */}
-        <form>
-          <div>
+        <div className="p-10">
+          <div className="flex justify-between pt-2">
             <label>First Name: </label>
             <input
               type="text"
@@ -73,7 +86,7 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
               }
             />
           </div>
-          <div>
+          <div className="flex justify-between pt-2">
             <label>Last Name: </label>
             <input
               type="text"
@@ -86,11 +99,11 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
               }
             />
           </div>
-          <div>
+          <div className="flex justify-between pt-2">
             <label>Date Of Birth: </label>
             {/* TODO date guards, min|max */}
             <input
-              type="date"
+              type="text"
               value={localApplication?.dateOfBirth}
               onChange={(e) =>
                 setLocalApplication({
@@ -100,7 +113,7 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
               }
             />
           </div>
-          <div>
+          <div className="flex justify-between pt-2">
             <label>Address: </label>
             <input
               type="text"
@@ -113,7 +126,7 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
               }
             />
           </div>
-          <div>
+          <div className="flex justify-between pt-2">
             <label>Street: </label>
             <input
               type="text"
@@ -126,7 +139,7 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
               }
             />
           </div>
-          <div>
+          <div className="flex justify-between pt-2">
             <label>City: </label>
             <input
               type="text"
@@ -139,7 +152,7 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
               }
             />
           </div>
-          <div>
+          <div className="flex justify-between pt-2">
             <label>State: </label>
             <input
               type="text"
@@ -152,7 +165,7 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
               }
             />
           </div>
-          <div>
+          <div className="flex justify-between pt-2">
             <label>Zipcode: </label>
             <input
               type="number"
@@ -165,110 +178,142 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
               }
             />
           </div>
-          {(localApplication.vehicles || [{ ...vehicleTemplate }]).map(
-            ({ vin, year, make, model }: any, i: number) => (
-              <div key={i}>
-                <div>
-                  <label>VIN: </label>
-                  <input
-                    type="text"
-                    value={get(localApplication, ["vehicles", i, "vin"]) || vin}
-                    onChange={(e) => {
-                      const vehicles = [
-                        ...(localApplication.vehicles || [
-                          { ...vehicleTemplate },
-                        ]),
-                      ];
-                      vehicles[i].vin = e.target.value;
-                      setLocalApplication({
-                        ...localApplication,
-                        vehicles,
-                      });
-                    }}
-                  />
-                </div>
-                <div>
-                  <label>Year: </label>
-                  <input
-                    type="text"
-                    value={
-                      get(localApplication, ["vehicles", i, "year"]) || year
-                    }
-                    onChange={(e) => {
-                      const vehicles = [
-                        ...(localApplication.vehicles || [
-                          { ...vehicleTemplate },
-                        ]),
-                      ];
-                      vehicles[i].year = e.target.value;
-                      setLocalApplication({
-                        ...localApplication,
-                        vehicles,
-                      });
-                    }}
-                  />
-                </div>
-                <div>
-                  <label>Make: </label>
-                  <input
-                    type="text"
-                    value={
-                      get(localApplication, ["vehicles", i, "make"]) || make
-                    }
-                    onChange={(e) => {
-                      const vehicles = [
-                        ...(localApplication.vehicles || [
-                          { ...vehicleTemplate },
-                        ]),
-                      ];
-                      vehicles[i].make = e.target.value;
-                      setLocalApplication({
-                        ...localApplication,
-                        vehicles,
-                      });
-                    }}
-                  />
-                </div>
-                <div>
-                  <label>Model: </label>
-                  <input
-                    type="text"
-                    value={
-                      get(localApplication, ["vehicles", i, "model"]) || model
-                    }
-                    onChange={(e) => {
-                      const vehicles = [
-                        ...(localApplication.vehicles || [
-                          { ...vehicleTemplate },
-                        ]),
-                      ];
-                      vehicles[i].model = e.target.value;
-                      setLocalApplication({
-                        ...localApplication,
-                        vehicles,
-                      });
-                    }}
-                  />
-                </div>
-              </div>
-            )
-          )}
-        </form>
+          <button
+            className="bg-green-100 p-2 rounded-sm my-4"
+            onClick={(e) => {
+              // e.stopPropagation();
+              e.preventDefault();
+              setLocalApplication({
+                ...localApplication,
+                vehicles: [
+                  ...(localApplication.vehicles || []),
+                  { ...vehicleTemplate },
+                ],
+              });
+            }}
+          >
+            Add Vehicle +
+          </button>
+          {!localApplication.vehicles
+            ? null
+            : localApplication.vehicles.map(
+                ({ vin, year, make, model }: any, i: number) => (
+                  <div key={i}>
+                    <br />
+                    <div className="flex justify-between pt-2">
+                      <label>VIN: </label>
+                      <input
+                        type="text"
+                        value={
+                          get(localApplication, ["vehicles", i, "vin"]) || vin
+                        }
+                        onChange={(e) => {
+                          const vehicles = [
+                            ...(localApplication.vehicles || [
+                              { ...vehicleTemplate },
+                            ]),
+                          ];
+                          vehicles[i].vin = e.target.value;
+                          setLocalApplication({
+                            ...localApplication,
+                            vehicles,
+                          });
+                        }}
+                      />
+                    </div>
+                    <div className="flex justify-between pt-2">
+                      <label>Year: </label>
+                      <input
+                        type="text"
+                        value={
+                          get(localApplication, ["vehicles", i, "year"]) || year
+                        }
+                        onChange={(e) => {
+                          const vehicles = [
+                            ...(localApplication.vehicles || [
+                              { ...vehicleTemplate },
+                            ]),
+                          ];
+                          vehicles[i].year = e.target.value;
+                          setLocalApplication({
+                            ...localApplication,
+                            vehicles,
+                          });
+                        }}
+                      />
+                    </div>
+                    <div className="flex justify-between pt-2">
+                      <label>Make: </label>
+                      <input
+                        type="text"
+                        value={
+                          get(localApplication, ["vehicles", i, "make"]) || make
+                        }
+                        onChange={(e) => {
+                          const vehicles = [
+                            ...(localApplication.vehicles || [
+                              { ...vehicleTemplate },
+                            ]),
+                          ];
+                          vehicles[i].make = e.target.value;
+                          setLocalApplication({
+                            ...localApplication,
+                            vehicles,
+                          });
+                        }}
+                      />
+                    </div>
+                    <div className="flex justify-between pt-2">
+                      <label>Model: </label>
+                      <input
+                        type="text"
+                        value={
+                          get(localApplication, ["vehicles", i, "model"]) ||
+                          model
+                        }
+                        onChange={(e) => {
+                          const vehicles = [
+                            ...(localApplication.vehicles || [
+                              { ...vehicleTemplate },
+                            ]),
+                          ];
+                          vehicles[i].model = e.target.value;
+                          setLocalApplication({
+                            ...localApplication,
+                            vehicles,
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                )
+              )}
+        </div>
       </div>
-      <div>
+      <div className="flex justify-center space-x-2">
         <button
+          className="bg-blue-100 hover:bg-blue-200 p-4 rounded-sm cursor-pointer"
           disabled={
             JSON.stringify(application) === JSON.stringify(localApplication)
           }
-          onClick={() => validateUpdate() && update()}
+          onClick={() => {
+            console.log("there");
+            validateUpdate() && update();
+          }}
         >
           Update
         </button>
         <button
+          className="bg-green-100 hover:bg-green-200 p-4 rounded-sm cursor-pointer"
           disabled={
             JSON.stringify(application) === JSON.stringify(localApplication)
           }
-          onClick={() => validateSubmit() && submit()}
+          onClick={async () => {
+            console.log("here");
+            if (!validateSubmit()) return;
+            await submit();
+            await getQuote();
+          }}
         >
           Submit
         </button>
