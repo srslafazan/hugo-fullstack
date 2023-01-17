@@ -9,7 +9,7 @@ export type Application = {
   id: number;
   firstName: string;
   lastName: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   address: string;
   street: string;
   city: string;

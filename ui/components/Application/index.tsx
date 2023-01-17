@@ -108,7 +108,7 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
             {/* TODO date guards, min|max */}
             <input
               type="text"
-              value={localApplication?.dateOfBirth}
+              value={localApplication?.dateOfBirth as any}
               onChange={(e) =>
                 setLocalApplication({
                   ...localApplication,
@@ -177,7 +177,7 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
               onChange={(e) =>
                 setLocalApplication({
                   ...localApplication,
-                  zipcode: e.target.value,
+                  zipcode: parseInt(e.target.value),
                 })
               }
             />
