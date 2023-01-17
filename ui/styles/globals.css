@@ -40,6 +40,10 @@ a {
   text-decoration: none;
 }
 
+input {
+  border: 1px solid black;
+}
+
 .text-theme-blue {
   color: var(--color-primary);
 }

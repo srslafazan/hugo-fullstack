@@ -1,13 +1,13 @@
 import express from "express";
-// import { cors } from "cors";
-var cors = require("cors");
+const cors = require("cors");
 
-import bodyParser from "body-parser";
+const bodyParser = require("body-parser");
 import "joi-extract-type";
 
 import applications from "./routes/applications";
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 

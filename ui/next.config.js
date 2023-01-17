@@ -5,12 +5,14 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // redirects: {
-  //   "/api/": async () => "http://localhost:3000/*",
-  // },
-  // rewrites: {
-  //   "/api/": async () => "http://localhost:3000/*",
-  // },
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "http://localhost:3001/:path*",
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

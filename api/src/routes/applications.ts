@@ -5,11 +5,8 @@ import {
   createValidator,
 } from "express-joi-validation";
 
-// interface HelloRequestSchema extends ValidatedRequestSchema {
-//   [ContainerTypes.Query]: Joi.extractType<typeof querySchema>
+import { validators } from "../lib/validators";
 
-// ValidatedRequest<HelloRequestSchema>,
-import { validators, schema } from "../lib/validators";
 const router = Router();
 const validator: ExpressJoiInstance = createValidator();
 
@@ -66,17 +63,10 @@ router.put(
 
 // POST route to validate the application and return a price
 router.post("/:id/validate", guards.application.exists, (req, res) => {
-  if (!schema.validate(applications[req.params.id])) {
+  if (!validators.application.validate.validate(applications[req.params.id])) {
     return res.json({ valid: false });
   }
   return res.json({ valid: true, price: Math.random() * 100 });
 });
-
-// GET route to resume an existing application
-// router.get("/:id/resume", guards.application.exists, (req, res) => {
-//   return res.json({
-//     application: applications[req.params.id],
-//   });
-// });
 
 export default router;
