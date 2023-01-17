@@ -2,13 +2,13 @@ import { useCallback, useEffect, useState } from "react";
 import { get } from "lodash";
 import axios from "axios";
 
-import { validators } from "../../../api/src/lib/validators";
+import { validators } from "../../../api/build/lib/validators";
 
 const vehicleTemplate = { vin: "", year: "", make: "", model: "" };
 
-export const Application = ({ view = false, edit = false, id = null }) => {
-  const [application, setApplication] = useState({ id });
-  const [localApplication, setLocalApplication] = useState({ id });
+export const Application = ({ view = false, edit = false, id = "" }) => {
+  const [application, setApplication] = useState({ id } as any);
+  const [localApplication, setLocalApplication] = useState({ id } as any);
   const [validation, setValidation]: [any, Function] = useState(null);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export const Application = ({ view = false, edit = false, id = null }) => {
       ...localApplication,
     });
 
-  if (!id) return "loading...";
+  if (!id) return <div>loading...</div>;
 
   return view ? (
     <div>
@@ -166,7 +166,7 @@ export const Application = ({ view = false, edit = false, id = null }) => {
             />
           </div>
           {(localApplication.vehicles || [{ ...vehicleTemplate }]).map(
-            ({ vin, year, make, model }, i) => (
+            ({ vin, year, make, model }: any, i: number) => (
               <div key={i}>
                 <div>
                   <label>VIN: </label>

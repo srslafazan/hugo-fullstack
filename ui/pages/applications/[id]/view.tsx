@@ -10,14 +10,6 @@ import { Application } from "../../../components/Application";
 
 export default function ApplicationView() {
   const router = useRouter();
-  const [application, setApplication] = React.useState({ firstName: "Shain" });
-
-  React.useEffect(() => {
-    // TODO
-    fetch(`/api/${1}`).then(async (r) => {
-      setApplication((await r.json()).body);
-    });
-  }, []);
 
   return (
     <div className={styles.container}>
@@ -27,7 +19,7 @@ export default function ApplicationView() {
       <Spotlights />
 
       <main className={styles.main}>
-        <Application view application={application} />
+        <Application view id={router.query.id as string} />
       </main>
       <Footer />
     </div>

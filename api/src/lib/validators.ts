@@ -1,5 +1,4 @@
-import Joi from "joi";
-import "joi-extract-type";
+import * as Joi from "joi";
 
 import { getNextYear, yearsDiff } from "./index";
 

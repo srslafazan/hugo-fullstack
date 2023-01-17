@@ -2,7 +2,6 @@ import express from "express";
 const cors = require("cors");
 
 const bodyParser = require("body-parser");
-import "joi-extract-type";
 
 import applications from "./routes/applications";
 const app = express();

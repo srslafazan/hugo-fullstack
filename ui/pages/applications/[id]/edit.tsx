@@ -19,7 +19,7 @@ export default function EditApplication() {
       <Spotlights />
 
       <main className={styles.main}>
-        <Application edit id={router.query.id} />
+        <Application edit id={router.query.id as string} />
       </main>
       <Footer />
     </div>

@@ -4,7 +4,7 @@ export function getNextYear() {
   return oneYearFromNow.getFullYear();
 }
 
-export function yearsDiff(dateFrom, dateTo) {
+export function yearsDiff(dateFrom: Date, dateTo: Date): number {
   const date1 = new Date(dateFrom);
   const date2 = new Date(dateTo);
   const yearsDiff = date2.getFullYear() - date1.getFullYear();
