@@ -66,10 +66,6 @@ router.post("/:id/validate", guards.application.exists, (req, res) => {
   const validationResult = validators.application.validate.validate(
     applications[req.params.id]
   );
-  console.log(validationResult);
-  console.log("");
-  console.log("");
-  console.log(JSON.stringify(validationResult, null, 2));
   if (validationResult.error) {
     return res.status(400).json({ valid: false });
   }

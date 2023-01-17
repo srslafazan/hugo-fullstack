@@ -22,7 +22,6 @@ export default function Home() {
             const response = await await fetch("/api/applications", {
               method: "post",
             }).then((r) => r.json());
-            console.log("response", response);
             router.push({
               pathname: "/applications/[id]/edit",
               query: { id: response.application.id },

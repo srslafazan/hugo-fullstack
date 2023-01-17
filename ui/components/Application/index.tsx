@@ -319,7 +319,6 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
             JSON.stringify(application) === JSON.stringify(localApplication)
           }
           onClick={() => {
-            console.log("there");
             validateUpdate() && update();
           }}
         >
@@ -331,7 +330,6 @@ export const Application = ({ view = false, edit = false, id = "" }) => {
             JSON.stringify(application) === JSON.stringify(localApplication)
           }
           onClick={async () => {
-            console.log("here");
             if (!validateSubmit()) return;
             await submit();
             await getQuote();
